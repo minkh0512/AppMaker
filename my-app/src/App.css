@@ -1,0 +1,51 @@
+*{margin:0;padding:0;box-sizing: border-box;}
+button{cursor: pointer;}
+.section-game .list{
+  display: flex;
+  font-size: 0;
+  flex-wrap:wrap;
+}
+.section-game .list-item{
+  width: 25%;
+  padding: 1%;
+}
+.section-game .list-item .button_open{
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  background-color: #fafafa;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  perspective: 100rem;
+}
+.section-game .list-item .button_open img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 100%;
+  vertical-align: middle;
+  transform: rotateY(0deg);
+}
+.section-game .list-item .button_open .bg_img{
+  display: block;
+  width: 100%;
+  padding-bottom: 100%;
+  background:black;
+  transform: rotateY(-180deg);
+}
+.section-game .list-item .button_open.hide:not(.opened) img{
+  transform: rotateY(180deg);
+}
+.section-game .list-item .button_open.hide:not(.opened) .bg_img{
+  transform: rotateY(0deg);
+}
+
+.section-game .list-item .card{
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translate3d(0,0,0);
+  -webkit-perspective: 0;
+  -webkit-transition: 1s; 
+  backface-visibility: hidden; /*뒷면 숨기기*/ 
+  visibility: visible; 
+  transition: 1s;
+}
