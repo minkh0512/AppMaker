@@ -26,12 +26,15 @@ button{cursor: pointer;}
   background-color: pink;
   border-color: darkmagenta;
 }
+.title_content .start-timer{
+  font-size: 20px;
+}
 .bg_ready_img{
   position: absolute;
 }
 .bg_ready_img1{
-  right: -20%;
-  top: -10%;
+  right: -70px;
+  top: -70px;
   width: 80%;
   transform: rotate(-150deg);
 }

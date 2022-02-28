@@ -60,7 +60,7 @@ const CardGame = ()=>{
                 element.classList.add('hide');
             });
             document.querySelector('.freezing').classList.remove('active');
-        }, 3000);
+        }, 5000);
     },[]);
     
     return(

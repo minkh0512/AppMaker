@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import './App.css';
 import CardGame from './components/CardGame';
 import classNames from 'classnames/bind';
@@ -9,11 +9,31 @@ import card4 from './img/card4.png';
 
 const App = () =>{
   const [playing, setPlaying] = useState(false);
+  let startTimer = 5;
 
   function clickHandler(){
     setPlaying(true);
   }
+  function countDown(from) {
+    let current = from;
+  
+    let timerId = setInterval(function() {
+      console.log(current)
+      if (current < 2) {
+        clearInterval(timerId);
+        document.querySelector('.start-timer').innerHTML = 'START!';
+        return
+      }
+      current--;
+      document.querySelector('.counterdown').innerHTML = current;
+    }, 1000);
+  }
 
+  useEffect(()=>{
+    playing && console.log(countDown(5));
+    
+  },[playing]);
+  
   return (
     <div className="app-card-matching">
       <div className={
@@ -23,7 +43,8 @@ const App = () =>{
         )
       }>
         <h1 className="app-title">잔망루피 짝맞추기 게임</h1>
-        <button className="button-start" onClick={clickHandler}>시작</button>
+        {playing ? <p className="start-timer"><span className="counterdown">{startTimer}</span>초 후 시작됩니다.</p> : <button className="button-start" onClick={clickHandler}>시작</button>}
+        
       </div>
       {
         playing 
