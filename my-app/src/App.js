@@ -18,7 +18,6 @@ const App = () =>{
     let current = from;
   
     let timerId = setInterval(function() {
-      console.log(current)
       if (current < 2) {
         clearInterval(timerId);
         document.querySelector('.start-timer').innerHTML = 'START!';
