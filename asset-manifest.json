@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/AppMaker/static/css/main.1d2b30b7.css",
-    "main.js": "/AppMaker/static/js/main.a2b2555f.js",
+    "main.js": "/AppMaker/static/js/main.f37cfcd9.js",
     "static/js/787.28cb0dcd.chunk.js": "/AppMaker/static/js/787.28cb0dcd.chunk.js",
-    "static/media/card1.png": "/AppMaker/static/media/card1.89dd1f9b1f7d27831daf.png",
-    "static/media/card2.png": "/AppMaker/static/media/card2.9f8fc8b8e99b794e54e5.png",
-    "static/media/card5.png": "/AppMaker/static/media/card5.372f1a5533bb90d64680.png",
-    "static/media/card4.png": "/AppMaker/static/media/card4.286cb8a7333d50a5b382.png",
-    "static/media/card8.png": "/AppMaker/static/media/card8.024ad1caefd4b6ecd9c6.png",
-    "static/media/card6.png": "/AppMaker/static/media/card6.3f6db103d4c2498b25b7.png",
-    "static/media/card3.png": "/AppMaker/static/media/card3.250db1df1e3050393f53.png",
-    "static/media/card7.png": "/AppMaker/static/media/card7.089e75efd35bc4679548.png",
+    "static/media/card4.png": "/AppMaker/static/media/card4.5f9e19964cafae1c6481.png",
+    "static/media/card5.png": "/AppMaker/static/media/card5.7f71b8d2ddc817d984c3.png",
+    "static/media/card2.png": "/AppMaker/static/media/card2.af2768509c14fe003992.png",
+    "static/media/card3.png": "/AppMaker/static/media/card3.6b6ccd95835267e4096c.png",
+    "static/media/card7.png": "/AppMaker/static/media/card7.6b5dd4aa06e80826d410.png",
+    "static/media/card1.png": "/AppMaker/static/media/card1.55c3a2d6c4d520534724.png",
+    "static/media/card6.png": "/AppMaker/static/media/card6.026a7fe26d21e82b53d8.png",
+    "static/media/card8.png": "/AppMaker/static/media/card8.5f5f4f9e46ac983f5ae1.png",
     "index.html": "/AppMaker/index.html",
     "main.1d2b30b7.css.map": "/AppMaker/static/css/main.1d2b30b7.css.map",
-    "main.a2b2555f.js.map": "/AppMaker/static/js/main.a2b2555f.js.map",
+    "main.f37cfcd9.js.map": "/AppMaker/static/js/main.f37cfcd9.js.map",
     "787.28cb0dcd.chunk.js.map": "/AppMaker/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1d2b30b7.css",
-    "static/js/main.a2b2555f.js"
+    "static/js/main.f37cfcd9.js"
   ]
 }
