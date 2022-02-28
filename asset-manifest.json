@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/AppMaker/static/css/main.3c67a69f.css",
-    "main.js": "/AppMaker/static/js/main.1475c6bb.js",
+    "main.css": "/AppMaker/static/css/main.9f64f4ec.css",
+    "main.js": "/AppMaker/static/js/main.27d9153e.js",
     "static/js/787.28cb0dcd.chunk.js": "/AppMaker/static/js/787.28cb0dcd.chunk.js",
     "static/media/card4.png": "/AppMaker/static/media/card4.33f521a737387520660e.png",
     "static/media/card5.png": "/AppMaker/static/media/card5.c07621e97fd7ef78e999.png",
@@ -12,12 +12,12 @@
     "static/media/card6.png": "/AppMaker/static/media/card6.6981cc88b206843efab9.png",
     "static/media/card8.png": "/AppMaker/static/media/card8.7d202dfa4b84f1363c16.png",
     "index.html": "/AppMaker/index.html",
-    "main.3c67a69f.css.map": "/AppMaker/static/css/main.3c67a69f.css.map",
-    "main.1475c6bb.js.map": "/AppMaker/static/js/main.1475c6bb.js.map",
+    "main.9f64f4ec.css.map": "/AppMaker/static/css/main.9f64f4ec.css.map",
+    "main.27d9153e.js.map": "/AppMaker/static/js/main.27d9153e.js.map",
     "787.28cb0dcd.chunk.js.map": "/AppMaker/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3c67a69f.css",
-    "static/js/main.1475c6bb.js"
+    "static/css/main.9f64f4ec.css",
+    "static/js/main.27d9153e.js"
   ]
 }
