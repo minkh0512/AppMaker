@@ -29,7 +29,7 @@ const App = () =>{
   }
 
   useEffect(()=>{
-    playing && console.log(countDown(5));
+    playing && countDown(5);
     
   },[playing]);
   
