@@ -44,18 +44,18 @@ const cardImage = [
         "active" : false,
         "opened" : false
     },
-    {
-        "image" : card7,
-        "name" : "hi",
-        "active" : false,
-        "opened" : false
-    },
-    {
-        "image" : card8,
-        "name" : "wall",
-        "active" : false,
-        "opened" : false
-    },
+    // {
+    //     "image" : card7,
+    //     "name" : "hi",
+    //     "active" : false,
+    //     "opened" : false
+    // },
+    // {
+    //     "image" : card8,
+    //     "name" : "wall",
+    //     "active" : false,
+    //     "opened" : false
+    // },
 ];
 
 export default cardImage;

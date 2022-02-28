@@ -1,6 +1,6 @@
 import cardImage from "../api/cardImage";
 import classNames from 'classnames/bind';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const shuffleCard = (array) => {
     let currentIndex = array.length,  
@@ -35,6 +35,7 @@ const CardGame = ()=>{
         if(openCardCount === 1){
             fristCard = targetCardName
         }else if(openCardCount === 2) {
+            document.querySelector('.freezing').classList.add('active');
             secondCard = targetCardName;
             fristCard === secondCard && document.querySelectorAll(`.button_open[data-card-name=${targetCardName}]`).forEach((element)=>{
                 element.classList.add('opened');
@@ -46,6 +47,7 @@ const CardGame = ()=>{
                 document.querySelectorAll('.button_open').forEach((element)=>{
                     element.classList.add('hide');
                 })
+                document.querySelector('.freezing').classList.remove('active');
             }, 1100);
         };
     }
@@ -57,8 +59,9 @@ const CardGame = ()=>{
             document.querySelectorAll('.button_open').forEach((element)=>{
                 element.classList.add('hide');
             });
-        }, 2000);
-    },[])
+            document.querySelector('.freezing').classList.remove('active');
+        }, 3000);
+    },[]);
     
     return(
         <div className="section-game">
@@ -82,6 +85,7 @@ const CardGame = ()=>{
                     })
                 }
             </ul>
+            <div className="freezing active"></div>
         </div>
     )
 }
