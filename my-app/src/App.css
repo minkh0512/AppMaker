@@ -64,10 +64,10 @@ button{cursor: pointer;}
   flex-wrap:wrap;
 }
 .section-game .list-item{
-  width: 33.33%;
+  width: 25%;
   padding: 0.5%;
 }
-.section-game .list-item .button_open{
+.section-game .list-item .button_flip{
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -76,7 +76,7 @@ button{cursor: pointer;}
   border-radius: 10px;
   perspective: 100rem;
 }
-.section-game .list-item .button_open img{
+.section-game .list-item .button_flip img{
   position: absolute;
   top: 0;
   left: 0;
@@ -84,17 +84,17 @@ button{cursor: pointer;}
   vertical-align: middle;
   transform: rotateY(0deg);
 }
-.section-game .list-item .button_open .bg_img{
+.section-game .list-item .button_flip .bg_img{
   display: block;
   width: 100%;
   padding-bottom: 100%;
   background:pink;
   transform: rotateY(-180deg);
 }
-.section-game .list-item .button_open.hide:not(.opened) img{
+.section-game .list-item .button_flip.hide:not(.fliped) img{
   transform: rotateY(180deg);
 }
-.section-game .list-item .button_open.hide:not(.opened) .bg_img{
+.section-game .list-item .button_flip.hide:not(.fliped) .bg_img{
   transform: rotateY(0deg);
 }
 

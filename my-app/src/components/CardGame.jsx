@@ -2,7 +2,8 @@ import cardImage from "../api/cardImage";
 import classNames from 'classnames/bind';
 import { useEffect, useState } from "react";
 
-const shuffleCard = (array) => {
+function shuffleCard(array){
+    console.log(array);
     let currentIndex = array.length,  
     randomIndex;
 
@@ -10,19 +11,24 @@ const shuffleCard = (array) => {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
 
-        [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
+        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
     }
     return array;
 }
 
-const CardGame = ()=>{
+const cardImageClone = cardImage.slice(0);
+console.log(cardImageClone);
+const setCardImage = cardImage.concat(cardImageClone);
+console.log(setCardImage);
+const shuffleCardResult = shuffleCard(setCardImage);
+console.log(shuffleCardResult);
 
-    const cardImageClone = cardImage.slice(0);
-    const setCardImage = cardImage.concat(cardImageClone);
-    let openCardCount = 0;
-    let fristCard, secondCard;
+let openCardCount = 0;
+let fristCard, secondCard;
 
+const CardList = ({item, onFreezing}) => {
+    const { image, name, active, fliped } = item;
+    
     function clickHandler(e) {
         const target = e.currentTarget
         if(!target.classList.contains('hide')){
@@ -30,36 +36,58 @@ const CardGame = ()=>{
         }else{
             target.classList.remove('hide');
         }
+
         const targetCardName = target.getAttribute('data-card-name');
         openCardCount++;
+
         if(openCardCount === 1){
-            fristCard = targetCardName
+            fristCard = targetCardName;
         }else if(openCardCount === 2) {
-            document.querySelector('.freezing').classList.add('active');
+            onFreezing(true);
             secondCard = targetCardName;
-            fristCard === secondCard && document.querySelectorAll(`.button_open[data-card-name=${targetCardName}]`).forEach((element)=>{
-                element.classList.add('opened');
+            fristCard === secondCard && document.querySelectorAll(`.button_flip[data-card-name=${targetCardName}]`).forEach((element)=>{
+                element.classList.add('fliped');
             });
             openCardCount = 0;
             fristCard = '';
             secondCard = '';
             setTimeout(()=>{
-                document.querySelectorAll('.button_open').forEach((element)=>{
+                document.querySelectorAll('.button_flip').forEach((element)=>{
                     element.classList.add('hide');
                 })
-                document.querySelector('.freezing').classList.remove('active');
+                onFreezing(false);
             }, 1100);
         };
     }
 
-    const shuffleCardList = shuffleCard(setCardImage);
+    return (
+        <li className="list-item">
+            <button className={classNames(
+                    'button_flip'
+                )} 
+                data-card-name={name} 
+                onClick={clickHandler}
+            >
+                <img className="card" src={image} alt={name} />
+                <span className="bg_img card"></span>
+            </button>
+        </li>
+    )
+}
 
+const CardGame = ()=>{
+    const shuffleCardList = shuffleCardResult;
+    const [ freezing, setFreezing ] = useState(true);
+    function onFreezing(value){
+        setFreezing(value);
+    }
+    
     useEffect(()=>{
         setTimeout(() => {
-            document.querySelectorAll('.button_open').forEach((element)=>{
+            document.querySelectorAll('.button_flip').forEach((element)=>{
                 element.classList.add('hide');
             });
-            document.querySelector('.freezing').classList.remove('active');
+            setFreezing(false);
         }, 5000);
     },[]);
     
@@ -68,24 +96,18 @@ const CardGame = ()=>{
             <ul className="list">
                 {
                     shuffleCardList.map((item,index)=>{
-                        const { image, name, active, opened } = item;
                         return(
-                            <li className="list-item" key={index+name}>
-                                <button className={classNames(
-                                        'button_open'
-                                    )} 
-                                    data-card-name={name} 
-                                    onClick={clickHandler}
-                                >
-                                    <img className="card" src={image} alt={name} />
-                                    <span className="bg_img card"></span>
-                                </button>
-                            </li>
+                            <CardList item={item} onFreezing={onFreezing} key={`cardList${index}`} />
                         )
                     })
                 }
             </ul>
-            <div className="freezing active"></div>
+            <div className={classNames(
+                'freezing',
+                {'active' : freezing}
+            )}>
+
+            </div>
         </div>
     )
 }

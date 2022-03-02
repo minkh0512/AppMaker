@@ -8,11 +8,11 @@ import card3 from './img/card3.png';
 import card4 from './img/card4.png';
 
 const App = () =>{
-  const [playing, setPlaying] = useState(false);
+  const [start, setStart] = useState(false);
   let startTimer = 5;
 
   function clickHandler(){
-    setPlaying(true);
+    setStart(true);
   }
   function countDown(from) {
     let current = from;
@@ -29,24 +29,30 @@ const App = () =>{
   }
 
   useEffect(()=>{
-    playing && countDown(5);
+    start && countDown(5);
     
-  },[playing]);
+  },[start]);
   
   return (
     <div className="app-card-matching">
       <div className={
         classNames(
           'title_content',
-          {'fixed' : !playing}
+          {'fixed' : !start}
         )
       }>
         <h1 className="app-title">잔망루피 짝맞추기 게임</h1>
-        {playing ? <p className="start-timer"><span className="counterdown">{startTimer}</span>초 후 시작됩니다.</p> : <button className="button-start" onClick={clickHandler}>시작</button>}
+        {
+          start 
+          ? 
+          <p className="start-timer"><span className="counterdown">{startTimer}</span>초 후 시작됩니다.</p> 
+          : 
+          <button className="button-start" onClick={clickHandler}>시작</button>
+        }
         
       </div>
       {
-        playing 
+        start 
         ? 
         <CardGame />
         :

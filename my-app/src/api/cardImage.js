@@ -12,50 +12,50 @@ const cardImage = [
         "image" : card1,
         "name" : "sad",
         "active" : false,
-        "opened" : false
+        "fliped" : false
     },
     {
         "image" : card2,
         "name" : "shock",
         "active" : false,
-        "opened" : false
+        "fliped" : false
     },
     {
         "image" : card3,
         "name" : "mask",
         "active" : false,
-        "opened" : false
+        "fliped" : false
     },
     {
         "image" : card4,
         "name" : "sleep",
         "active" : false,
-        "opened" : false
+        "fliped" : false
     },
     {
         "image" : card5,
         "name" : "angry",
         "active" : false,
-        "opened" : false
+        "fliped" : false
     },
     {
         "image" : card6,
         "name" : "hungry",
         "active" : false,
-        "opened" : false
+        "fliped" : false
     },
-    // {
-    //     "image" : card7,
-    //     "name" : "hi",
-    //     "active" : false,
-    //     "opened" : false
-    // },
-    // {
-    //     "image" : card8,
-    //     "name" : "wall",
-    //     "active" : false,
-    //     "opened" : false
-    // },
+    {
+        "image" : card7,
+        "name" : "hi",
+        "active" : false,
+        "fliped" : false
+    },
+    {
+        "image" : card8,
+        "name" : "wall",
+        "active" : false,
+        "fliped" : false
+    },
 ];
 
 export default cardImage;
