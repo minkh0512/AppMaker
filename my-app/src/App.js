@@ -9,29 +9,27 @@ import card4 from './img/card4.png';
 
 const App = () =>{
   const [start, setStart] = useState(false);
-  let startTimer = 5;
+  const [count, setCount] = useState(5);
 
   function clickHandler(){
     setStart(true);
+    countDown();
   }
-  function countDown(from) {
-    let current = from;
-  
-    let timerId = setInterval(function() {
-      if (current < 2) {
-        clearInterval(timerId);
-        document.querySelector('.start-timer').innerHTML = 'START!';
-        return
-      }
-      current--;
-      document.querySelector('.counterdown').innerHTML = current;
+
+  function countDown(){
+    if (!count) return;
+
+    const countDownTimer = setTimeout(() => {
+      setCount(count - 1);
     }, 1000);
+
+    return () => clearTimeout(countDownTimer);
   }
 
   useEffect(()=>{
-    start && countDown(5);
-    
-  },[start]);
+    start && countDown();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[count]);
   
   return (
     <div className="app-card-matching">
@@ -45,7 +43,16 @@ const App = () =>{
         {
           start 
           ? 
-          <p className="start-timer"><span className="counterdown">{startTimer}</span>초 후 시작됩니다.</p> 
+          <p className="start-timer">
+            {
+              count > 0
+              ?
+              <><span className="counterdown">{count}</span>초 후 시작됩니다.</>
+              :
+              `Start`
+            }
+            
+          </p> 
           : 
           <button className="button-start" onClick={clickHandler}>시작</button>
         }

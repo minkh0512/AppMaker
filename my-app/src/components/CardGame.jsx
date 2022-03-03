@@ -2,8 +2,8 @@ import cardImage from "../api/cardImage";
 import classNames from 'classnames/bind';
 import { useEffect, useState } from "react";
 
-function shuffleCard(array){
-    console.log(array);
+function shuffleCard(originArray){
+    const array = [...originArray];
     let currentIndex = array.length,  
     randomIndex;
 
@@ -17,11 +17,8 @@ function shuffleCard(array){
 }
 
 const cardImageClone = cardImage.slice(0);
-console.log(cardImageClone);
 const setCardImage = cardImage.concat(cardImageClone);
-console.log(setCardImage);
 const shuffleCardResult = shuffleCard(setCardImage);
-console.log(shuffleCardResult);
 
 let openCardCount = 0;
 let fristCard, secondCard;
