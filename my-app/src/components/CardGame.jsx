@@ -23,15 +23,18 @@ const shuffleCardResult = shuffleCard(setCardImage);
 let openCardCount = 0;
 let fristCard, secondCard;
 
-const CardList = ({item, onFreezing}) => {
-    const { image, name, active, fliped } = item;
+const CardList = ({item, onFreezing, index}) => {
+    const { image, name, selected, fliped } = item || {};
+    const [cardSelected, setCardSelected] = useState(selected); // 선택한 카드
+    const [cardFliped, setCardFliped] = useState(fliped); // 짝맞춘 카드
     
     function clickHandler(e) {
-        const target = e.currentTarget
-        if(!target.classList.contains('hide')){
+        const target = e.currentTarget;
+        console.log('Fliped card');
+        if(cardFliped || cardSelected){
             return
         }else{
-            target.classList.remove('hide');
+            setCardSelected(true);
         }
 
         const targetCardName = target.getAttribute('data-card-name');
@@ -60,13 +63,17 @@ const CardList = ({item, onFreezing}) => {
     return (
         <li className="list-item">
             <button className={classNames(
-                    'button_flip'
+                    'button_flip',
+                    {'hide' : !cardSelected },
+                    {'fliped' : fliped }
                 )} 
                 data-card-name={name} 
                 onClick={clickHandler}
             >
                 <img className="card" src={image} alt={name} />
-                <span className="bg_img card"></span>
+                <span className="bg_img card">
+                    <span className="card_num">{index+1}</span>
+                </span>
             </button>
         </li>
     )
@@ -74,7 +81,7 @@ const CardList = ({item, onFreezing}) => {
 
 const CardGame = ()=>{
     const shuffleCardList = shuffleCardResult;
-    const [ freezing, setFreezing ] = useState(true);
+    const [ freezing, setFreezing ] = useState(true); // 클릭 방지 투명 딤드
     function onFreezing(value){
         setFreezing(value);
     }
@@ -85,7 +92,7 @@ const CardGame = ()=>{
                 element.classList.add('hide');
             });
             setFreezing(false);
-        }, 5000);
+        }, 0);
     },[]);
     
     return(
@@ -94,7 +101,7 @@ const CardGame = ()=>{
                 {
                     shuffleCardList.map((item,index)=>{
                         return(
-                            <CardList item={item} onFreezing={onFreezing} key={`cardList${index}`} />
+                            <CardList item={item} onFreezing={onFreezing} index={index} key={`cardList${index}`} />
                         )
                     })
                 }

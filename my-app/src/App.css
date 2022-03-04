@@ -97,6 +97,21 @@ button{cursor: pointer;}
 .section-game .list-item .button_flip.hide:not(.fliped) .bg_img{
   transform: rotateY(0deg);
 }
+.section-game .list-item .button_flip .bg_img .card_num{
+  position: absolute;
+  display: table;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  margin-top: -25px;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 40px;
+  height: 50px;
+  line-height: 50px;
+  color: #fff;
+  text-shadow: -1px 0 gray, 0 1px gray, 1px 0 gray, 0 -1px gray;
+}
 
 .section-game .list-item .card{
   -webkit-backface-visibility: hidden;
