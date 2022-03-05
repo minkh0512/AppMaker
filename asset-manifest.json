@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/AppMaker/static/css/main.c18fbdd3.css",
-    "main.js": "/AppMaker/static/js/main.27a59e31.js",
-    "static/media/card4.png": "/AppMaker/static/media/card4.33f521a737387520660e.png",
-    "static/media/card5.png": "/AppMaker/static/media/card5.c07621e97fd7ef78e999.png",
-    "static/media/card2.png": "/AppMaker/static/media/card2.5e3c1143a98b6ad419e6.png",
-    "static/media/card3.png": "/AppMaker/static/media/card3.b9696d4dd0051d32ecfe.png",
-    "static/media/card7.png": "/AppMaker/static/media/card7.753fe3c3c9acf14cedad.png",
-    "static/media/card1.png": "/AppMaker/static/media/card1.1b3c31b64a1b8e41e88d.png",
-    "static/media/card6.png": "/AppMaker/static/media/card6.6981cc88b206843efab9.png",
-    "static/media/card8.png": "/AppMaker/static/media/card8.7d202dfa4b84f1363c16.png",
+    "main.js": "/AppMaker/static/js/main.99f6bf44.js",
+    "static/media/card4.png": "/AppMaker/static/media/card4.1b4ebff445c522f807ab.png",
+    "static/media/card2.png": "/AppMaker/static/media/card2.30e6ae1fa92028b5348d.png",
+    "static/media/card5.png": "/AppMaker/static/media/card5.b8f162de62e2be6bc79a.png",
+    "static/media/card1.png": "/AppMaker/static/media/card1.7a38b552ba8b709deb03.png",
+    "static/media/card3.png": "/AppMaker/static/media/card3.73c0ec032c0cff98123c.png",
+    "static/media/card7.png": "/AppMaker/static/media/card7.a0084bd78de0227138f1.png",
+    "static/media/card6.png": "/AppMaker/static/media/card6.160efe5fded22471d8aa.png",
+    "static/media/card8.png": "/AppMaker/static/media/card8.a79c4b72de7d25cb0bd5.png",
     "index.html": "/AppMaker/index.html",
     "main.c18fbdd3.css.map": "/AppMaker/static/css/main.c18fbdd3.css.map",
-    "main.27a59e31.js.map": "/AppMaker/static/js/main.27a59e31.js.map"
+    "main.99f6bf44.js.map": "/AppMaker/static/js/main.99f6bf44.js.map"
   },
   "entrypoints": [
     "static/css/main.c18fbdd3.css",
-    "static/js/main.27a59e31.js"
+    "static/js/main.99f6bf44.js"
   ]
 }
