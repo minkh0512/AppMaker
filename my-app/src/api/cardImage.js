@@ -11,49 +11,49 @@ const cardImage = [
     {
         "image" : card1,
         "name" : "sad",
-        "selected" : false,
+        "selected" : true,
         "fliped" : false
     },
     {
         "image" : card2,
         "name" : "shock",
-        "selected" : false,
+        "selected" : true,
         "fliped" : false
     },
     {
         "image" : card3,
         "name" : "mask",
-        "selected" : false,
+        "selected" : true,
         "fliped" : false
     },
     {
         "image" : card4,
         "name" : "sleep",
-        "selected" : false,
+        "selected" : true,
         "fliped" : false
     },
     {
         "image" : card5,
         "name" : "angry",
-        "selected" : false,
+        "selected" : true,
         "fliped" : false
     },
     {
         "image" : card6,
         "name" : "hungry",
-        "selected" : false,
+        "selected" : true,
         "fliped" : false
     },
     {
         "image" : card7,
         "name" : "hi",
-        "selected" : false,
+        "selected" : true,
         "fliped" : false
     },
     {
         "image" : card8,
         "name" : "wall",
-        "selected" : false,
+        "selected" : true,
         "fliped" : false
     },
 ];

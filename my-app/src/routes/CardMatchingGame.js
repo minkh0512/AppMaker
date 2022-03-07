@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import '../css/CardMatchingGame.css';
 import CardGameTitle from '../components/CardGameTitle'
-import CardGame from '../components/CardGame';
+import CardGame from '../components/CardGameContent';
 import card1 from '../img/card1.png';
 import card2 from '../img/card2.png';
 import card3 from '../img/card3.png';

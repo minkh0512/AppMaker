@@ -133,3 +133,37 @@ button{cursor: pointer;}
 .section-game .freezing.active{
   display: block;
 }
+.complete_layer{
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+.complete_layer .layer_content{
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  z-index: 100;
+  width: 200px;
+  margin: 0 0 0 -100px;
+  padding: 15px 0;
+  background-color: #fff;
+  text-align: center;
+  border-radius: 30px;
+}
+.complete_layer .layer_content .text{
+  
+}
+.complete_layer .layer_content .button_restart{
+  background: none;
+  border: none
+}
+.complete_layer .dimmed{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background:rgba(0,0,0,.3);
+}
