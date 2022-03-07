@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/AppMaker/static/css/main.c18fbdd3.css",
-    "main.js": "/AppMaker/static/js/main.99f6bf44.js",
+    "main.js": "/AppMaker/static/js/main.d103ae62.js",
     "static/media/card4.png": "/AppMaker/static/media/card4.1b4ebff445c522f807ab.png",
     "static/media/card2.png": "/AppMaker/static/media/card2.30e6ae1fa92028b5348d.png",
     "static/media/card5.png": "/AppMaker/static/media/card5.b8f162de62e2be6bc79a.png",
@@ -12,10 +12,10 @@
     "static/media/card8.png": "/AppMaker/static/media/card8.a79c4b72de7d25cb0bd5.png",
     "index.html": "/AppMaker/index.html",
     "main.c18fbdd3.css.map": "/AppMaker/static/css/main.c18fbdd3.css.map",
-    "main.99f6bf44.js.map": "/AppMaker/static/js/main.99f6bf44.js.map"
+    "main.d103ae62.js.map": "/AppMaker/static/js/main.d103ae62.js.map"
   },
   "entrypoints": [
     "static/css/main.c18fbdd3.css",
-    "static/js/main.99f6bf44.js"
+    "static/js/main.d103ae62.js"
   ]
 }
