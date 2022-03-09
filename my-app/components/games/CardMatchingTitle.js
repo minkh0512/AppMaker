@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 
-const CardGameTitle = ({start, startClickHandler}) => {
+const CardMatchingTitle = ({start, startClickHandler}) => {
   const [count, setCount] = useState(5);
 
   function startClick(){
@@ -31,7 +31,6 @@ const CardGameTitle = ({start, startClickHandler}) => {
           {'fixed' : !start}
         )
       }>
-      <h1 className="app-title">잔망루피 짝맞추기 게임</h1>
       {
         start 
         ? 
@@ -48,9 +47,38 @@ const CardGameTitle = ({start, startClickHandler}) => {
         : 
         <button className="button-start" onClick={startClick}>시작</button>
       }
-        
+      <style jsx>{`
+      .title_content{
+        z-index: 100;
+        width: 100%;
+        text-align: center;
+      }
+      .title_content.fixed{
+        position: fixed;
+        top: 50%;
+        margin-top: -30px;
+      }
+      .title_content .app-title{
+        font-size: 1.5rem;
+        color: pink;
+        text-shadow: -1px 0 gray, 0 1px gray, 1px 0 gray, 0 -1px gray;
+      }
+      .title_content .button-start{
+        margin-top: 10px;
+        display: inline-block;
+        width: 100px;
+        height: 50px;
+        font-size: 25px;
+        font-weight: bold;
+        background-color: pink;
+        border-color: darkmagenta;
+      }
+      .title_content .start-timer{
+        font-size: 20px;
+      }
+      `}</style>
     </div>
   )
 }
 
-export default CardGameTitle;
+export default CardMatchingTitle;
