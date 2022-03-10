@@ -71,6 +71,9 @@ export default function Header() {
             </ul>
           </div>
         </nav>
+        {
+          navLayer && <div className="dimmed" onClick={onClickNav}></div>
+        }
       </div>
       <style jsx>{`
         header{
@@ -89,7 +92,9 @@ export default function Header() {
           left: 0;
           width: 50px;
           height: 50px;
-          z-index: 100;
+          z-index: 1000;
+          background-color: #fff;
+          border-bottom: 1px solid #ccc;
         }
         .button_nav .line{
           display: block;
@@ -119,7 +124,7 @@ export default function Header() {
           width: 100%;
           padding-left: 50px;
           transition: all .5s;
-          z-index: 90;
+          z-index: 990;
         }
         nav.active{
           transform: translateX(-100%);
@@ -149,6 +154,15 @@ export default function Header() {
           padding: 5px 15px 5px 25px;
           font-weight: normal;
           font-size: 18px;
+        }
+        .dimmed{
+          position: fixed;
+          top: 0;
+          right: 0;
+          bottom:0 ;
+          left: 0;
+          z-index: 980;
+          background:rgba(0,0,0,.3);
         }
       `}</style>
     </header>
