@@ -5,6 +5,7 @@ html,body {
 button{
   background: none;
   border: 0;
+  cursor: pointer;
 }
 a {
   color: inherit;
@@ -14,6 +15,9 @@ a {
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
+}
+*::after,*::before{
   box-sizing: border-box;
 }
 li{list-style: none;}

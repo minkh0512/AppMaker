@@ -1,7 +1,11 @@
-export default function HabitTracker(){
+import HabitTrackerContent from '../../components/daily/HabitTrackerContent';
+
+const HabitTracker = () => {
   return (
-    <>
-      <h1>HabitTracker Home</h1>
-    </>
+    <div className="app-habit-tracker">
+      <HabitTrackerContent />
+    </div>
   );
 }
+
+export default HabitTracker
