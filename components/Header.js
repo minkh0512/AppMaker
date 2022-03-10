@@ -50,6 +50,18 @@ export default function Header() {
                   </li>
                 </ul>
               </li>
+              <li>
+                <Link href="/daily">
+                  <a className={classNames({'active': pathName === '/daily'})} onClick={onClickNav}>Daily App List</a>
+                </Link>
+                <ul className="depth2">
+                  <li>
+                    <Link href="/daily/habitTracker">
+                      <a className={classNames({'active': pathName === '/daily/habitTracker'})} onClick={onClickNav}>HabitTracker</a>
+                    </Link>
+                  </li>
+                </ul>
+              </li>
             </ul>
           </div>
         </nav>
@@ -101,6 +113,7 @@ export default function Header() {
           width: 100%;
           padding-left: 50px;
           transition: all .5s;
+          z-index: 90;
         }
         nav.active{
           transform: translateX(-100%);
