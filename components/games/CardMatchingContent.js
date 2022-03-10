@@ -23,7 +23,6 @@ let shuffleCardResult = JSON.parse(JSON.stringify(shuffleCard(setCardImage)));
 const CardList = ({item, onFlipHandler, index}) => {
   const { image, name, selected, fliped } = item || {};
 
-  console.log(image)
   function clickHandler() {
     if(selected){
       return
