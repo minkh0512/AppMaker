@@ -14,7 +14,13 @@ export default function Header() {
       headerTitle = 'CardMatching'
       break;
     case '/games':
-      headerTitle = 'Games Home'
+      headerTitle = 'Games'
+      break;
+    case '/daily' :
+      headerTitle = 'Daily'
+      break;
+    case '/daily/habitTracker' :
+      headerTitle = 'HabitTracker'
       break;
     default: headerTitle = 'Home';
   }
@@ -40,7 +46,7 @@ export default function Header() {
             <ul className="depth1">
               <li>
                 <Link href="/games">
-                  <a className={classNames({'active': pathName === '/games'})} onClick={onClickNav}>Games List</a>
+                  <a className={classNames({'active': pathName === '/games'})} onClick={onClickNav}>Games</a>
                 </Link>
                 <ul className="depth2">
                   <li>
@@ -52,7 +58,7 @@ export default function Header() {
               </li>
               <li>
                 <Link href="/daily">
-                  <a className={classNames({'active': pathName === '/daily'})} onClick={onClickNav}>Daily App List</a>
+                  <a className={classNames({'active': pathName === '/daily'})} onClick={onClickNav}>Daily</a>
                 </Link>
                 <ul className="depth2">
                   <li>
