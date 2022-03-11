@@ -1,20 +1,18 @@
 import { useState } from "react";
-import habitTrackerApi from "../../public/api/daily/habitTracker";
 import classNames from "classnames";
 
-const DayComponet = ({data, sumTotalPercent}) => {
+const DayComponet = ({data, sumTotalPercent, onUpdateData, trackerIndex, dayIndex}) => {
   const {day, isComplete} = data;
-  const [dayPicker, setDayPicker] = useState(isComplete);
 
   function onClickDay(){
-    setDayPicker(!dayPicker);
-    sumTotalPercent(!dayPicker);
+    onUpdateData(trackerIndex,dayIndex,!isComplete);
+    sumTotalPercent(!isComplete);
   }
 
   return(
     <>
       <li>
-        <button onClick={onClickDay} className={classNames({'active':dayPicker})}>{day}</button>
+        <button onClick={onClickDay} className={classNames({'active':isComplete})}>{day}</button>
       </li>
       <style jsx>{`
         li{
@@ -66,15 +64,20 @@ const DayComponet = ({data, sumTotalPercent}) => {
   )
 }
 
-const HabitComponent = ({data}) => {
+const HabitComponent = ({data, onDeleteHandler, onUpdateDataHandler, index}) => {
   const { title, days } = data;
   const totalDays = days.length;
   let completeDays = days.filter(element => element.isComplete).length;
   const [ completeLength, setCompleteLength ] = useState(completeDays);
   let totalPercent = (100 / totalDays * completeLength).toFixed(2);
+  const trackerIndex = index;
 
   function sumTotalPercent(total){
     setCompleteLength(total ? completeLength + 1 : completeLength - 1);
+  }
+
+  function onClickDelete(){
+    onDeleteHandler(trackerIndex);
   }
 
   return(
@@ -92,14 +95,14 @@ const HabitComponent = ({data}) => {
           {
             days.map((item, index)=>{
               return(
-                <DayComponet data={item} key={index} sumTotalPercent={sumTotalPercent} />
+                <DayComponet data={item} key={index} sumTotalPercent={sumTotalPercent} onUpdateData={onUpdateDataHandler} trackerIndex={trackerIndex} dayIndex={index} />
               )
             })
           }
         </ul>
         <div className="bottom_box">
           <p className="complete">달성율 {totalPercent} %</p> 
-          <button className="button_delete">삭제</button>
+          <button className="button_delete" onClick={onClickDelete}>삭제</button>
         </div>
       </div>
       <style jsx>{`
@@ -167,7 +170,126 @@ const HabitComponent = ({data}) => {
 }
 
 const HabitTrackerContent = () => {
-  const [habits, setHabits] = useState(habitTrackerApi);
+  const [habits, setHabits] = useState({habitList:[{
+    title: '코딩하기',
+    days: [
+      {
+        day: 1,
+        isComplete: false
+      },
+      {
+        day: 2,
+        isComplete: false
+      },
+      {
+        day: 3,
+        isComplete: false
+      },
+      {
+        day: 4,
+        isComplete: false
+      },
+      {
+        day: 5,
+        isComplete: false
+      },
+      {
+        day: 6,
+        isComplete: false
+      },
+      {
+        day: 7,
+        isComplete: false
+      },
+      {
+        day: 8,
+        isComplete: false
+      },
+      {
+        day: 9,
+        isComplete: false
+      },
+      {
+        day: 10,
+        isComplete: false
+      },
+      {
+        day: 11,
+        isComplete: true
+      },
+      {
+        day: 12,
+        isComplete: false
+      },
+      {
+        day: 13,
+        isComplete: false
+      }
+    ]
+  },
+  {
+    title: '놀기',
+    days: [
+      {
+        day: 1,
+        isComplete: false
+      },
+      {
+        day: 2,
+        isComplete: false
+      },
+      {
+        day: 3,
+        isComplete: false
+      },
+      {
+        day: 4,
+        isComplete: true
+      },
+      {
+        day: 5,
+        isComplete: true
+      },
+      {
+        day: 6,
+        isComplete: false
+      },
+      {
+        day: 7,
+        isComplete: false
+      },
+      {
+        day: 8,
+        isComplete: false
+      },
+      {
+        day: 9,
+        isComplete: false
+      },
+      {
+        day: 10,
+        isComplete: false
+      },
+      {
+        day: 11,
+        isComplete: false
+      },
+      {
+        day: 12,
+        isComplete: false
+      }
+    ]
+  }]});
+  function onDeleteHandler(index){
+    const habitList = [...habits.habitList];
+    habitList.splice(index,1);
+    setHabits({habitList});
+  }
+  function onUpdateDataHandler(trackerIndex, dayIndex, isComplete){
+    const habitList = [...habits.habitList];
+    habitList[trackerIndex].days[dayIndex].isComplete = isComplete ? true : false;
+    setHabits({habitList});
+  }
 
   return (
     <>
@@ -179,9 +301,9 @@ const HabitTrackerContent = () => {
       </form>
       <div className="tracker_list">
         {
-          habits.map((data, index)=>{
+          habits.habitList.map((data, index)=>{
             return(
-              <HabitComponent data={data} key={index} />
+              <HabitComponent data={data} onDeleteHandler={onDeleteHandler} onUpdateDataHandler={onUpdateDataHandler} index={index} key={index} />
             )
           })
         }
