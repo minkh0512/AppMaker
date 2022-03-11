@@ -69,7 +69,7 @@ const DayComponet = ({data, sumTotalPercent}) => {
 const HabitComponent = ({data}) => {
   const { title, days } = data;
   const totalDays = days.length;
-  let completeDays = days.filter(element => 'isComplete' === element).length;
+  let completeDays = days.filter(element => element.isComplete).length;
   const [ completeLength, setCompleteLength ] = useState(completeDays);
   let totalPercent = (100 / totalDays * completeLength).toFixed(2);
 

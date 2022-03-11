@@ -45,7 +45,7 @@ const habitTrackerApi = [
       },
       {
         day: 11,
-        isComplete: false
+        isComplete: true
       },
       {
         day: 12,
@@ -74,11 +74,11 @@ const habitTrackerApi = [
       },
       {
         day: 4,
-        isComplete: false
+        isComplete: true
       },
       {
         day: 5,
-        isComplete: false
+        isComplete: true
       },
       {
         day: 6,
