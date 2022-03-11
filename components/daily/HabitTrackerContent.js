@@ -1,12 +1,11 @@
 import { useState } from "react";
 import classNames from "classnames";
 
-const DayComponet = ({data, sumTotalPercent, onUpdateData, trackerIndex, dayIndex}) => {
+const DayComponet = ({data, onUpdateData, trackerIndex, dayIndex}) => {
   const {day, isComplete} = data;
 
   function onClickDay(){
     onUpdateData(trackerIndex,dayIndex,!isComplete);
-    sumTotalPercent(!isComplete);
   }
 
   return(
@@ -68,13 +67,8 @@ const HabitComponent = ({data, onDeleteHandler, onUpdateDataHandler, index}) => 
   const { title, days } = data;
   const totalDays = days.length;
   let completeDays = days.filter(element => element.isComplete).length;
-  const [ completeLength, setCompleteLength ] = useState(completeDays);
-  let totalPercent = (100 / totalDays * completeLength).toFixed(2);
+  let totalPercent = (100 / totalDays * completeDays).toFixed(2);
   const trackerIndex = index;
-
-  function sumTotalPercent(total){
-    setCompleteLength(total ? completeLength + 1 : completeLength - 1);
-  }
 
   function onClickDelete(){
     onDeleteHandler(trackerIndex);
@@ -82,7 +76,7 @@ const HabitComponent = ({data, onDeleteHandler, onUpdateDataHandler, index}) => 
 
   return(
     <>
-      <div className="tracker">
+      <div className="habit">
         <div className="title_box">
           <input type="text" defaultValue={title} />
           <button>
@@ -95,7 +89,7 @@ const HabitComponent = ({data, onDeleteHandler, onUpdateDataHandler, index}) => 
           {
             days.map((item, index)=>{
               return(
-                <DayComponet data={item} key={index} sumTotalPercent={sumTotalPercent} onUpdateData={onUpdateDataHandler} trackerIndex={trackerIndex} dayIndex={index} />
+                <DayComponet data={item} key={index} onUpdateData={onUpdateDataHandler} trackerIndex={trackerIndex} dayIndex={index} />
               )
             })
           }
@@ -106,10 +100,10 @@ const HabitComponent = ({data, onDeleteHandler, onUpdateDataHandler, index}) => 
         </div>
       </div>
       <style jsx>{`
-        .tracker{
+        .habit{
           position: relative;
         }
-        .tracker + .tracker{
+        .habit + .habit{
           padding-top: 10px;
         }
         .title_box{
@@ -299,7 +293,7 @@ const HabitTrackerContent = () => {
           <button>추가</button>
         </div>
       </form>
-      <div className="tracker_list">
+      <div className="habit_list">
         {
           habits.habitList.map((data, index)=>{
             return(
@@ -338,7 +332,7 @@ const HabitTrackerContent = () => {
           margin-right: 0.5%;
           background-color: #4caf50;
         }
-        .tracker_list{
+        .habit_list{
           padding: 10px 10px 100px;
         }
       `}</style>
