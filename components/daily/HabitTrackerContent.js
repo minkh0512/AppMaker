@@ -81,6 +81,10 @@ const HabitComponent = ({data, onTitleSubmit, onDeleteHandler, onUpdateDataHandl
   let totalPercent = (100 / totalDays * completeDays).toFixed(2);
   const trackerIndex = index;
 
+  useEffect(()=>{
+    titleInput.current.value = title;
+  })
+
   const titleInput = useRef();
   function onSubmit(e){
     e.preventDefault();
@@ -189,8 +193,6 @@ const HabitComponent = ({data, onTitleSubmit, onDeleteHandler, onUpdateDataHandl
 
 const HabitTrackerContent = () => {
   const [habits, setHabits] = useState(null);
-
-  console.log(habits);
 
   useEffect(()=>{
     if(!localStorage.getItem('habitList')){
