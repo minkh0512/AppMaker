@@ -1,5 +1,16 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import classNames from "classnames";
+
+// 날짜 계산
+let thisMonth, thisMonthDays;
+let today = new Date().getDate();
+const newDay = new Date();
+const calMonthDay = () => {
+  let days = new Date(newDay.getFullYear(), newDay.getMonth()+1, 0).getDate();
+  thisMonth = newDay.getMonth() + 1;
+  thisMonthDays = days;
+}
+calMonthDay();
 
 const DayComponet = ({data, onUpdateData, trackerIndex, dayIndex}) => {
   const {day, isComplete} = data;
@@ -177,126 +188,29 @@ const HabitComponent = ({data, onTitleSubmit, onDeleteHandler, onUpdateDataHandl
 }
 
 const HabitTrackerContent = () => {
-  const [habits, setHabits] = useState({habitList:[{
-    title: '코딩하기',
-    days: [
-      {
-        day: 1,
-        isComplete: false
-      },
-      {
-        day: 2,
-        isComplete: false
-      },
-      {
-        day: 3,
-        isComplete: false
-      },
-      {
-        day: 4,
-        isComplete: false
-      },
-      {
-        day: 5,
-        isComplete: false
-      },
-      {
-        day: 6,
-        isComplete: false
-      },
-      {
-        day: 7,
-        isComplete: false
-      },
-      {
-        day: 8,
-        isComplete: false
-      },
-      {
-        day: 9,
-        isComplete: false
-      },
-      {
-        day: 10,
-        isComplete: false
-      },
-      {
-        day: 11,
-        isComplete: true
-      },
-      {
-        day: 12,
-        isComplete: false
-      },
-      {
-        day: 13,
-        isComplete: false
-      }
-    ]
-  },
-  {
-    title: '놀기',
-    days: [
-      {
-        day: 1,
-        isComplete: false
-      },
-      {
-        day: 2,
-        isComplete: false
-      },
-      {
-        day: 3,
-        isComplete: false
-      },
-      {
-        day: 4,
-        isComplete: true
-      },
-      {
-        day: 5,
-        isComplete: true
-      },
-      {
-        day: 6,
-        isComplete: false
-      },
-      {
-        day: 7,
-        isComplete: false
-      },
-      {
-        day: 8,
-        isComplete: false
-      },
-      {
-        day: 9,
-        isComplete: false
-      },
-      {
-        day: 10,
-        isComplete: false
-      },
-      {
-        day: 11,
-        isComplete: false
-      },
-      {
-        day: 12,
-        isComplete: false
-      }
-    ]
-  }]});
+  const [habits, setHabits] = useState(null);
+
+  console.log(habits);
+
+  useEffect(()=>{
+    if(!localStorage.getItem('habitList')){
+      localStorage.setItem('habitList',  JSON.stringify({'habitList':[]}));
+    }
+    let habits = JSON.parse(localStorage.getItem('habitList'));
+    setHabits(habits);
+  },[]);
 
   function onTitleSubmit(trackerIndex, targetValue){
     const habitList = [...habits.habitList];
     habitList[trackerIndex].title = targetValue;
+    localStorage.setItem('habitList',  JSON.stringify({habitList}));
     setHabits({habitList});
   }
 
   function onDeleteHandler(index){
     const habitList = [...habits.habitList];
     habitList.splice(index,1);
+    localStorage.setItem('habitList',  JSON.stringify({habitList}));
     setHabits({habitList});
   }
 
@@ -308,19 +222,20 @@ const HabitTrackerContent = () => {
       alert('1글자 이상 입력해주세요.');
       return
     }
+    function setDays(){
+      let dayArray = [];
+      for(let i = 0;i < thisMonthDays; i++){
+        dayArray[i] = {day:i+1,isComplete:false}
+      }
+      return dayArray;
+    }
     const addHabitInfo = {
       title : targetValue,
-      days: [{
-        day: 1,
-        isComplete: false
-      },
-      {
-        day: 1,
-        isComplete: false
-      }]
+      days: setDays()
     };
     const habitList = [...habits.habitList, addHabitInfo];
 
+    localStorage.setItem('habitList',  JSON.stringify({habitList}));
     setHabits({habitList});
     titleInput.current.value = '';
   }
@@ -328,6 +243,7 @@ const HabitTrackerContent = () => {
   function onUpdateDataHandler(trackerIndex, dayIndex, isComplete){
     const habitList = [...habits.habitList];
     habitList[trackerIndex].days[dayIndex].isComplete = isComplete ? true : false;
+    localStorage.setItem('habitList',  JSON.stringify({habitList}));
     setHabits({habitList});
   }
 
@@ -341,7 +257,7 @@ const HabitTrackerContent = () => {
       </form>
       <div className="habit_list">
         {
-          habits.habitList.map((data, index)=>{
+          habits && habits.habitList.map((data, index)=>{
             return(
               <HabitComponent data={data} onTitleSubmit={onTitleSubmit} onDeleteHandler={onDeleteHandler} onUpdateDataHandler={onUpdateDataHandler} index={index} key={index} />
             )
@@ -353,7 +269,7 @@ const HabitTrackerContent = () => {
           position: fixed;
           bottom: 0;
           left: 0;
-          z-index: 10;
+          z-index: 80;
           width: 100%;
           padding: 10px;
           text-align: center;
