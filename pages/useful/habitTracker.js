@@ -1,4 +1,4 @@
-import HabitTrackerContent from '../../components/daily/HabitTrackerContent';
+import HabitTrackerContent from '../../components/useful/HabitTrackerContent';
 
 const HabitTracker = () => {
   return (

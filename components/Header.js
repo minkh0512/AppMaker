@@ -16,11 +16,14 @@ export default function Header() {
     case '/games':
       headerTitle = 'Games'
       break;
-    case '/daily' :
-      headerTitle = 'Daily'
+    case '/useful' :
+      headerTitle = 'Useful'
       break;
-    case '/daily/habitTracker' :
+    case '/useful/habitTracker' :
       headerTitle = 'HabitTracker'
+      break;
+    case '/useful/drawingBoard' :
+      headerTitle = 'DrawingBoard'
       break;
     default: headerTitle = 'Home';
   }
@@ -57,13 +60,18 @@ export default function Header() {
                 </ul>
               </li>
               <li>
-                <Link href="/daily">
-                  <a className={classNames({'active': pathName === '/daily'})} onClick={onClickNav}>Daily</a>
+                <Link href="/useful">
+                  <a className={classNames({'active': pathName === '/useful'})} onClick={onClickNav}>Useful</a>
                 </Link>
                 <ul className="depth2">
                   <li>
-                    <Link href="/daily/habitTracker">
-                      <a className={classNames({'active': pathName === '/daily/habitTracker'})} onClick={onClickNav}>HabitTracker</a>
+                    <Link href="/useful/habitTracker">
+                      <a className={classNames({'active': pathName === '/useful/habitTracker'})} onClick={onClickNav}>HabitTracker</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/useful/drawingBoard">
+                      <a className={classNames({'active': pathName === '/useful/drawingBoard'})} onClick={onClickNav}>DrawingBoard</a>
                     </Link>
                   </li>
                 </ul>
@@ -77,7 +85,10 @@ export default function Header() {
       </div>
       <style jsx>{`
         header{
-          position: relative;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
           height: 50px;
           border-bottom: 1px solid #ccc;
           text-align: center;
