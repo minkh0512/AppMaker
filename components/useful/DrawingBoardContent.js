@@ -7,6 +7,8 @@ const DrawingBoardContent = () => {
   const [strokeWidth, setStrokeWidth] = useState(4);
   const [canvasColor, setCanvasColor] = useState('white');
   const [eraserWidth, setEraserWidth] = useState(5);
+  const [toolSizeLayer, setToolSizeLayer] = useState(false);
+  const [toolColorLayer, setToolColorLayer] = useState(false);
   useEffect(()=>{
     
   },[]);
@@ -50,6 +52,10 @@ const DrawingBoardContent = () => {
             <button>
               <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAACH0lEQVR4nO3Zy2rUUBzH8Y94QWfrFX0GN64EFQulgriqG59BX8IHEAXRhSsFd6Jv0OrKbRdeS/sIXSgo3sFx0QyNZS7JJDknSc8X/jDMMIf/95eT/wmERCKRSCQSicTeZF/sBgpyFhdxECtYj9tOOAZ4jGGu/uIB9kfsKwgDrPpfPl/PcCBadw0zS77XIRSV72UIZeV7FcK88r0Ioap8p0OoS76TIdQt36kQmpLvRAgDvNSc/KieauHjfij5Ud0Mo1WM0PJDrAUxK0AM+SG2QsjNIpb8EK8D+E0lpvwQN5pXnExs+XvNK06m6XN+Vj0S8QhM8jMaTPINVVR5WMBvceTvi3zlT2WfrwsfQnT5VWziTPbdNfy0B7b97nt+E6ez30KEEFX+iPEDb0OYEKLLr0xprukQWi3fdAhR5Q8rd85/tHM6LKt+OkSd9vBwTFNFQjiZ/b9KCNHlD+GX+Zr/oFoI0eXZfkdfZfu+x4lsrTIhtEIejqo+wNbtzIQigzH6s/1u1lQP4R2OZ+tN2wmtufJ5zuGr6iG8NT2EVsqPuKCeEPJHZP52aN22H8cCvqkewhscy9Zcxl0dkB9xST07IR9C51jEd9VDuB268TpZUi2EVr/FLcoSfigv/1wP5EdcUS6EF1ogP2ninsflOdZbtL0bZvEFd/Cn5Pqf8WSO/5VmQ/XB1lRdrVN00ha8pdiVDM0nvIrdRCKRSCQSiX7wD5UaAPetd7aGAAAAAElFTkSuQmCC"/>
             </button>
+            <div className="tool_option">
+              {toolColorLayer && <div className="tool_color"></div>}
+              {toolSizeLayer && <div className="tool_size"></div>}
+            </div>
           </div>
         </div>
         <ReactSketchCanvas
