@@ -1,22 +1,110 @@
 import { Canvas, ReactSketchCanvas } from 'react-sketch-canvas';
 import { useRef, useState, useEffect } from 'react';
+import classNames from "classnames";
+
+const colorPalette = [
+  {color : 'red', code : '#FF0000'},
+  {color : 'orange', code : '#FF7F00'},
+  {color : 'yellow', code : '#FFF000'},
+  {color : 'green', code : '#00FF00'},
+  {color : 'blue', code : '#0000FF'},
+  {color : 'navi', code : '#4B0082'},
+  {color : 'purple', code : '#9400D3'},
+  {color : 'white', code : '#FFFFFF'},
+  {color : 'black', code : '#000000'}
+]
+const sizePalette = [1,2,4,8,16,32];
+
+const ColorChip = ({data, onChangeStrokeColor}) => {
+  function onClick(){
+    onChangeStrokeColor(data.code);
+  }
+  return(
+    <li>
+      <button style={{backgroundColor:data.code}} onClick={onClick}></button>
+    </li>
+  )
+}
+const CanvasColorChip = ({data, onChangeCanvasColor}) => {
+  function onClick(){
+    onChangeCanvasColor(data.code);
+  }
+  return(
+    <li>
+      <button style={{backgroundColor:data.code}} onClick={onClick}></button>
+    </li>
+  )
+}
+const SizeChip = ({size, onChangeStrokeSize}) => {
+  function onClick(){
+    onChangeStrokeSize(size)
+  }
+  return (
+    <li>
+      <button onClick={onClick}></button>
+    </li>
+  )
+}
+const EraserSizeChip = ({size, onChangeEraserSize}) => {
+  function onClick(){
+    onChangeEraserSize(size)
+  }
+  return (
+    <li>
+      <button onClick={onClick}></button>
+    </li>
+  )
+}
 
 const DrawingBoardContent = () => {
   const drawingBoard = useRef();
-  const [strokeColor, setStrokeColor] = useState('black');
-  const [strokeWidth, setStrokeWidth] = useState(4);
-  const [canvasColor, setCanvasColor] = useState('white');
+  const [strokeColor, setStrokeColor] = useState(colorPalette[8].code);
+  const [strokeWidth, setStrokeWidth] = useState(10);
+  const [canvasColor, setCanvasColor] = useState(colorPalette[7].code);
   const [eraserWidth, setEraserWidth] = useState(5);
-  const [toolSizeLayer, setToolSizeLayer] = useState(false);
-  const [toolColorLayer, setToolColorLayer] = useState(false);
+  const [toolStrokeLayerOpen, setToolStrokeLayerOpen] = useState(false);
+  const [toolCanvasLayerOpen, setToolCanvasLayerOpen] = useState(false);
+  const [toolEraserLayerOpen, setToolEraserLayerOpen] = useState(false);
   useEffect(()=>{
     
   },[]);
+
+  function onChangeStorke(){
+    setToolStrokeLayerOpen(!toolStrokeLayerOpen);
+    setToolCanvasLayerOpen(false);
+    setToolEraserLayerOpen(false);
+  }
+  function onChangeStrokeColor(code){
+    setStrokeColor(code);
+    drawingBoard.current.eraseMode(false);
+  }
+  function onChangeStrokeSize(size){
+    setStrokeWidth(size);
+    drawingBoard.current.eraseMode(false);
+  }
+  function onChangeBgColor(){
+    setToolStrokeLayerOpen(false);
+    setToolCanvasLayerOpen(!toolCanvasLayerOpen);
+    setToolEraserLayerOpen(false);
+  }
+  function onChangeCanvasColor(code){
+    setCanvasColor(code);
+  }
+  function onChangeEraser(){
+    setToolStrokeLayerOpen(false);
+    setToolCanvasLayerOpen(false);
+    setToolEraserLayerOpen(!toolEraserLayerOpen);
+  }
+  function onChangeEraserSize(size){
+    setEraserWidth(size);
+    drawingBoard.current.eraseMode(true);
+  }
 
   const canvasStyles = {
     border: 0,
     borderRadius: 0,
   }
+
   return(
     <>
       <div className="drawing-board">
@@ -43,18 +131,48 @@ const DrawingBoardContent = () => {
             </button>
           </div>
           <div className="tools">
-            <button>
+            <button onClick={onChangeStorke}>
               <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAABmJLR0QA/wD/AP+gvaeTAAADTklEQVRoge3azYscRRyH8c/OutFRiSaiqHgwRgWRgJCLkFwV0YN6FPRfUMGj4M2Td18g4tst+IKooHlRFDG+JCJGVDxoDupFTEAQlxAyHqqGecn0TL9VTa/OA8XMdlfPfB+qtvrX081/k9vxFv6O7XXcuNRECenjDwym2mlbVHofDuAb/IjDeByXx/0b+M6FwgMczB22CZfgJbNFBvgd+2Pf6/DDjD6n80auTw8fKJYdtn9wTzxmlvSfWVM3YDs2LRaelr7WpPSbWVM35AGcVU/6pLCQ3ZY3cjX6wunkCHbGbXWlN4Q1oLP0hdV3GP4EdsR9VaX35Qxehz4OuTD8cfWkf8Nl+eJX56Di8HWlH80Xvzrvmh/+K1wZ+5aVfj9f/HL0cFV8vx3HzBf4UjXp73NIlKUvFBVn8VDc1rb08QwepZhejc/h4bivjPQJo1PWvYqLk+fSqyymaDU+p9pIf44rYv+ikb4zuc0CimRTSB9IbrOARbJtSW8Ka8NSK6yysnWlj8V+w/691ELzmF6gqkhXWcjGi5OlUXVkm470Z0YjnZ2mslWkP8Qv8f17WEstN01bsmWkD8fv24Uzcdt9if0maFu2SPod4YKjP/bdT8a+2U5JqWRnSc/ifqNpPUGKZbuPt3FXgs8eso5XjMrKae6Ir78mzID0IzveDpk9YLfir9jn7vYVR+SUPWLyf3bILcKoDvBG+4oj6hYVddrHZv9kMy77idGdiNZZySZqK1kr2TSsZBO1layVbBr+V7Lb5CsXh9ez04zLfoRLW7ccY39Diaayu2SUJVyNvFYheJuy8JgMshfjeTwR/17HqyWCty1L+E35wQV9GvPCWKCn47YU0otks7AX500GSyHdCVnCXbZZAduU7owsfKs4aBvSnZJdE556mRf4mdh3HS8v6DvdioqKpXG9csGH0j3lpTsnS7Uio4p0J2XhEdWmaBnpzsrCU6ovQvOkOy3L/GeRq0p3XpZQr9YRHj9l9YRnG7flDF6XU+oLD4xq704zvDezgRsaftbuhsdnZbf6I3sez9oi0/ii+HpTxeM28RM+xYv4us1QKVnD1TiKPVP7zuDngnZKGNktyRfC1Dwp3E+92RaZnnU5KjyZes2yg+TgX2wYmlrH5YYAAAAAAElFTkSuQmCC"/>
             </button>
-            <button>
+            <button onClick={onChangeBgColor}>
               <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAACg0lEQVRYhdXXTYhOURgH8N/MJJLJdz4mUyxYKIOJxISNz8iGEIpplIWNLKVGWbFhYUFGspCJskCKja/kI5KV5JuNj0TDNONrLM59c92573vvO8bIv07de885z/9/nuc55zyX/xgjovZPMBAf8R1nMak3jddgEVZgJgYl+odH39vRFbUO7ERVuWQVsedZ2IX3uC+ssAb1Edke3MZ5PIvmNiXsXcSayEZZWCi4clSR/hocwj1hxZ2Yjza/vFBoj5UZkipcw+CMcavwI0Z0ARtTBHThNablFVCPAxljJktf7Q4cLiLiA6bnETADu0v0D8HDIiTfsETIjWKemJgloFqIfxoqcSZh9BOext7fYS4eFBHxFGOzRLRId1dzwtgNzMYmIdsLOfESDXhRRMQlGVt0XDRoZOzbcuGgiRtaLYTjKLb73fUPIhHFwtWc5YU6XBGydyjepBjZJri7FctSVvw86r+TMvcb5iRJKxLvY3AwMnQatZgi5MIzXMd4IcObsDJlIW+xDo1CmOK4KRx4JdEaU/1KOPnO4Ra+pqwsrXUK3tqMz4m+KaXIF+QkyNvOCHlx0q+E7RaGOPb1soDCgdQcCalPElYm3su+zXJgMLZEXHeyBi/V+x64IVxmuXGsF8kPoX855NAPp/6QuEPYAUlMyCuiCsd7SP5K+l6vE7bk1r8p4ipGp9gaJhQqXfiCeXlFlBOO/dH4NCRtvNS91uyxiHasLzF/cZF5e/MKKIg4kWLkCaZmzL1cQnhWGdgNG4Tj9aJQhlfnmNOGI3iUIqKhXAE9wV2hgG0Uqqm4gNq+ELA2IjsuXOEF8pa+IC9gi3ApdQmFyQHh965PMUD4YRna18Ql8RPM4HDbaPDQWQAAAABJRU5ErkJggg=="/>
             </button>
-            <button>
+            <button onClick={onChangeEraser}>
               <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAACH0lEQVR4nO3Zy2rUUBzH8Y94QWfrFX0GN64EFQulgriqG59BX8IHEAXRhSsFd6Jv0OrKbRdeS/sIXSgo3sFx0QyNZS7JJDknSc8X/jDMMIf/95eT/wmERCKRSCQSicTeZF/sBgpyFhdxECtYj9tOOAZ4jGGu/uIB9kfsKwgDrPpfPl/PcCBadw0zS77XIRSV72UIZeV7FcK88r0Ioap8p0OoS76TIdQt36kQmpLvRAgDvNSc/KieauHjfij5Ud0Mo1WM0PJDrAUxK0AM+SG2QsjNIpb8EK8D+E0lpvwQN5pXnExs+XvNK06m6XN+Vj0S8QhM8jMaTPINVVR5WMBvceTvi3zlT2WfrwsfQnT5VWziTPbdNfy0B7b97nt+E6ez30KEEFX+iPEDb0OYEKLLr0xprukQWi3fdAhR5Q8rd85/tHM6LKt+OkSd9vBwTFNFQjiZ/b9KCNHlD+GX+Zr/oFoI0eXZfkdfZfu+x4lsrTIhtEIejqo+wNbtzIQigzH6s/1u1lQP4R2OZ+tN2wmtufJ5zuGr6iG8NT2EVsqPuKCeEPJHZP52aN22H8cCvqkewhscy9Zcxl0dkB9xST07IR9C51jEd9VDuB268TpZUi2EVr/FLcoSfigv/1wP5EdcUS6EF1ogP2ninsflOdZbtL0bZvEFd/Cn5Pqf8WSO/5VmQ/XB1lRdrVN00ha8pdiVDM0nvIrdRCKRSCQSiX7wD5UaAPetd7aGAAAAAElFTkSuQmCC"/>
             </button>
-            <div className="tool_option">
-              {toolColorLayer && <div className="tool_color"></div>}
-              {toolSizeLayer && <div className="tool_size"></div>}
+            <div className={classNames('tool_option',{'active':toolStrokeLayerOpen})}>
+              <div className="tool_color">
+                <ul>
+                  {colorPalette.map((data,index)=>{
+                    return <ColorChip data={data} onChangeStrokeColor={onChangeStrokeColor} key={`strokeColor${index}`} />
+                  })}
+                </ul>
+              </div>
+              <div className="tool_size">
+                <ul>
+                  {sizePalette.map((data,index)=>{
+                    return <SizeChip size={data} onChangeStrokeSize={onChangeStrokeSize} key={`strokeSize${index}`} />
+                  })}
+                </ul>
+              </div>
+            </div>
+            <div className={classNames('tool_option',{'active':toolCanvasLayerOpen})}>
+              <div className="tool_color">
+                <ul>
+                  {colorPalette.map((data,index)=>{
+                    return <CanvasColorChip data={data} onChangeCanvasColor={onChangeCanvasColor} key={`canvasColor${index}`} />
+                  })}
+                </ul>
+              </div>
+            </div>
+            <div className={classNames('tool_option',{'active':toolEraserLayerOpen})}>
+              <div className="tool_size">
+                <ul>
+                  {sizePalette.map((data,index)=>{
+                    return <EraserSizeChip size={data} onChangeEraserSize={onChangeEraserSize} key={`eraserSize${index}`} />
+                  })}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -69,7 +187,7 @@ const DrawingBoardContent = () => {
           ref={drawingBoard}
         />
       </div>
-      <style jsx>{`
+      <style jsx global>{`
       .drawing-board{
         position: relative;
         height: 100%;
@@ -131,6 +249,65 @@ const DrawingBoardContent = () => {
       }
       .tools img{
         height: 34px;
+      }
+      .tool_option{
+        display: none;
+        position: absolute;
+        top: 49px;
+        right: 5px;
+      }
+      .tool_option.active{
+        display: block;
+      }
+      .tool_option ul{
+        white-space: nowrap;
+      }
+      .tool_option li{
+        display: inline-block;
+      }
+      .tool_color + .tool_size{
+        margin-top: 5px;
+      }
+      .tool_size button{
+        position: relative;
+        background: #fff;
+      }
+      .tool_size button:after{
+        content: '';
+        display: block;
+        border-radius: 50%;
+        background:#000;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        width: 30px;
+        height: 1px;
+        margin: 0 auto;
+      }
+      .tool_size li:nth-child(2) button:after{
+        height: 2px;
+        margin-top: -1px;
+      }
+      .tool_size li:nth-child(3) button:after{
+        height: 4px;
+        margin-top: -2px;
+        border-radius: 2px;
+      }
+      .tool_size li:nth-child(4) button:after{
+        height: 8px;
+        margin-top: -4px;
+        border-radius: 4px;
+      }
+      .tool_size li:nth-child(5) button:after{
+        height: 16px;
+        margin-top: -8px;
+        border-radius: 8px;
+      }
+      .tool_size li:nth-child(6) button:after{
+        height: 32px;
+        margin-top: -16px;
+        border-radius: 16px;
       }
       `}</style>
     </>
