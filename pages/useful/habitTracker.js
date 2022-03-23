@@ -1,9 +1,12 @@
-import HabitTrackerContent from '../../components/useful/HabitTrackerContent';
+import HabitTrackerComponent from '../../components/useful/habitTracker/HabitTracker';
+import { RecoilRoot } from 'recoil';
 
 const HabitTracker = () => {
   return (
     <div className="app-habit-tracker">
-      <HabitTrackerContent />
+      <RecoilRoot>
+        <HabitTrackerComponent />
+      </RecoilRoot>
     </div>
   );
 }
