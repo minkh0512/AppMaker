@@ -1,5 +1,5 @@
-import habits from "./habits";
+import habitsSate from "./habits";
 
 export {
-  habits
+  habitsSate
 }

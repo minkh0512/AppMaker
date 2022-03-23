@@ -1,6 +1,6 @@
-import { Atom } from 'recoil';
+import { atom } from 'recoil';
 
-export default Atom({
+export default atom({
   key: 'habits',
-  default: []
+  default: undefined
 })

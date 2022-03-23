@@ -1,10 +1,18 @@
 import classNames from "classnames";
+import { useRecoilState } from 'recoil';
+import { habitsSate } from '../../../store/useful/habitTracker';
+import * as _ from 'lodash';
 
-const Day = ({data, onUpdateData, trackerIndex, dayIndex}) => {
+const Day = ({data, trackerIndex, dayIndex}) => {
+  const [habits, setHabits] = useRecoilState(habitsSate);
+
   const {day, isComplete} = data;
 
   function onClickDay(){
-    onUpdateData(trackerIndex,dayIndex,!isComplete);
+    const habitList = _.cloneDeep(habits.habitList);
+    habitList[trackerIndex].days[dayIndex].isComplete = !isComplete;
+    localStorage.setItem('habitList',  JSON.stringify({habitList}));
+    setHabits({habitList});
   }
 
   return(

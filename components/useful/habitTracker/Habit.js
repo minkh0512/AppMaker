@@ -1,7 +1,12 @@
 import Day from "./Day";
 import { useEffect, useRef } from "react";
+import { useRecoilState } from 'recoil';
+import { habitsSate } from '../../../store/useful/habitTracker';
+import * as _ from 'lodash';
 
-const Habit = ({data, onTitleSubmit, onDeleteHandler, onUpdateDataHandler, index}) => {
+const Habit = ({data, index}) => {
+  const [habits, setHabits] = useRecoilState(habitsSate);
+
   const { title, days } = data;
   const totalDays = days.length;
   let completeDays = days.filter(element => element.isComplete).length;
@@ -13,24 +18,30 @@ const Habit = ({data, onTitleSubmit, onDeleteHandler, onUpdateDataHandler, index
   })
 
   const titleInput = useRef();
-  function onSubmit(e){
+  function onTitleSubmit(e){
     e.preventDefault();
+    const habitList = _.cloneDeep(habits.habitList);
     const targetValue = titleInput.current.value;
-    onTitleSubmit(trackerIndex, targetValue);
+    habitList[trackerIndex].title = targetValue;
+    localStorage.setItem('habitList',  JSON.stringify({habitList}));
+    setHabits({habitList});
   }
   
   function onClickModify(){
     titleInput.current.focus();
   }
 
-  function onClickDelete(){
-    onDeleteHandler(trackerIndex);
+  function onClickDelete(index){
+    const habitList = [...habits.habitList];
+    habitList.splice(index,1);
+    localStorage.setItem('habitList',  JSON.stringify({habitList}));
+    setHabits({habitList});
   }
 
   return(
     <>
       <div className="habit">
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onTitleSubmit}>
           <div className="title_box">
             <input type="text" ref={titleInput} defaultValue={title} />
             <button onClick={onClickModify}>
@@ -44,7 +55,7 @@ const Habit = ({data, onTitleSubmit, onDeleteHandler, onUpdateDataHandler, index
           {
             days.map((item, index)=>{
               return(
-                <Day data={item} key={index} onUpdateData={onUpdateDataHandler} trackerIndex={trackerIndex} dayIndex={index} />
+                <Day data={item} key={index} trackerIndex={trackerIndex} dayIndex={index} />
               )
             })
           }
@@ -57,9 +68,7 @@ const Habit = ({data, onTitleSubmit, onDeleteHandler, onUpdateDataHandler, index
       <style jsx>{`
         .habit{
           position: relative;
-        }
-        .habit + .habit{
-          padding-top: 10px;
+          padding: 10px 10px 0;
         }
         .title_box{
           position:relative;
