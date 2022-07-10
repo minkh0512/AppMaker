@@ -25,6 +25,12 @@ export default function Header() {
     case '/useful/drawingBoard' :
       headerTitle = 'DrawingBoard'
       break;
+    case '/etc/' :
+      headerTitle = 'ETC'
+      break;
+    case '/etc/movie' :
+      headerTitle = 'Movie'
+      break;
     default: headerTitle = 'Home';
   }
 
@@ -72,6 +78,18 @@ export default function Header() {
                   <li>
                     <Link href="/useful/drawingBoard">
                       <a className={classNames({'active': pathName === '/useful/drawingBoard'})} onClick={onClickNav}>DrawingBoard</a>
+                    </Link>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <Link href="/etc">
+                  <a className={classNames({'active': pathName === '/etc'})} onClick={onClickNav}>ETC</a>
+                </Link>
+                <ul className="depth2">
+                  <li>
+                    <Link href="/etc/movie">
+                      <a className={classNames({'active': pathName === '/etc/movie'})} onClick={onClickNav}>Movie</a>
                     </Link>
                   </li>
                 </ul>
